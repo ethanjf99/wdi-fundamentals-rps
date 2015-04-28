@@ -23,6 +23,7 @@ function randomPlay() {
 
 function getPlayerMove(move) {
 	move = move || getInput();
+	return move;
     /*var playerMove;
     if (move != 'rock' || move != 'paper' || move != 'scissors') {
 	    playerMove = getInput();
@@ -34,6 +35,7 @@ function getPlayerMove(move) {
 
 function getComputerMove(move) {
 	move = move || randomPlay();
+	return move;
     // Write an expression that operates on a variable called `move`
     // If a `move` has a value, your expression should evaluate to that value.
     // However, if `move` is not specified / is null, your expression should equal `randomPlay()`.
@@ -54,7 +56,7 @@ function getWinner(playerMove,computerMove) {
     // The rules of the game are that 'rock' beats 'scissors', 'scissors' beats 'paper', and 'paper' beats 'rock'.
     if (playerMove === computerMove) {
 	    winner = 'tie';
-	    } else if ((playerMove = 'rock' && computerMove === 'scissors') || (playerMove === 'scissors' && computerMove === 'paper') || (playerMove === 'paper' && computerMove === 'rock)) {
+	    } else if ((playerMove = 'rock' && computerMove === 'scissors') || (playerMove === 'scissors' && computerMove === 'paper') || (playerMove === 'paper' && computerMove === 'rock')) {
 	    winner = 'player';
 	    } else {
 	    winner = 'computer'
