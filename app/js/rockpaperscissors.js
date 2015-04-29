@@ -6,7 +6,7 @@
 'use strict';
 
 function getInput() {
-    console.log("Please choose either 'rock', 'paper', or 'scissors'.")
+    console.log("Please choose either 'rock', 'paper', or 'scissors'.");
     return prompt();
 }
 function randomPlay() {
@@ -23,38 +23,34 @@ function randomPlay() {
 /*           Write Your Code Below            */
 ////////////////////////////////////////////////
 
+var roundNum = 1;
+
 function getPlayerMove(move) {
+	/*
 	move = move || getInput();
 	return move;
+	*/
 	
-    /*
-    more robust code to account for errors
+//better (I think) code to account for errors other than being blank
+//.toLowerCase() lets you type in 'Rock' or 'PAPer' and still have it count
     
-    var playerMove;
-    if (move != 'rock' || move != 'paper' || move != 'scissors') {
-	    playerMove = getInput();
-	    } else {
-		    playerMove = move;
-		    }
-    return playerMove;
-    */
+   while (move.toLowerCase() !== 'rock' && move.toLowerCase() !== 'scissors' && move.toLowerCase() !== 'paper') {
+   move = getInput();
+   }
+   return move;
 }
 
 function getComputerMove(move) {
+	/*
 	move = move || randomPlay();
 	return move;
-   
-    /* 
-    This is more robust code that allows for errors (i.e., nonblank values of 'move' that don't correspond to Rock, Paper, or Scissors
     
-    var computerMove;
-     if (move != 'rock' || move != 'paper' || move != 'scissors') {    
-	     computerMove = randomPlay();
-	     } else {
-		     computerMove = move;
-		     }
-	     return computerMove;
-	 */
+    Below is more robust code that allows for errors (i.e., nonblank values of 'move' that don't correspond to Rock, Paper, or Scissors*/
+    
+    while (move !== 'rock' && move !== 'scissors' && move !== 'paper') {
+   move = randomPlay();
+   }
+   return move;
 }
 
 function getWinner(playerMove,computerMove) {
@@ -64,8 +60,9 @@ function getWinner(playerMove,computerMove) {
 	    } else if ((playerMove = 'rock' && computerMove === 'scissors') || (playerMove === 'scissors' && computerMove === 'paper') || (playerMove === 'paper' && computerMove === 'rock')) {
 	    winner = 'player';
 	    } else {
-	    winner = 'computer'
+	    winner = 'computer';
 	    }
+	console.log("Round no. " + roundNum + ". Winner: " + winner);
     return winner;
 }
 
@@ -76,18 +73,29 @@ function playToX() {
     var playerWins = 0;
     var computerWins = 0;
     
-	getWinner(getPlayerMove(getInput()), getComputerMove(randomPlay()));
+    while (playerWins < gamesToVictory && computerWins < gamesToVictory) {
+	var theGame = getWinner(getPlayerMove(getInput()), getComputerMove(randomPlay()));
     
-    if (playerWins = gamesToVictory) {
+    switch(theGame) {
+	    case 'player' :
+	    playerWins++;
+	    break;
+	    
+	    case 'computer' :
+	    computerWins++;
+	    break;
+	    }
+	roundNum++; 
+	}
+	
+    if (playerWins > computerWins) {
 	    console.log("You won! Thanks for playing.");
-	    } else if (computerWins = gamesToVictory) {
+	    } else {
 		    console.log("HAHAHAHA! I crushed you!");
-		    } else {
-			    //code TK
-			}
-    return [playerWins, computerWins];
+		    } 
+		    
+    return [playerWins, computerWins, roundNum - (1 + playerWins + computerWins)];
 }
-
 	
 playToX();
 
