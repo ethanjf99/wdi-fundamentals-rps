@@ -57,19 +57,24 @@ function getWinner(playerMove,computerMove) {
     var winner;
     if (playerMove === computerMove) {
 	    winner = 'tie';
-	    } else if ((playerMove = 'rock' && computerMove === 'scissors') || (playerMove === 'scissors' && computerMove === 'paper') || (playerMove === 'paper' && computerMove === 'rock')) {
+	    } else if ((playerMove === 'rock' && computerMove === 'scissors') || (playerMove === 'scissors' && computerMove === 'paper') || (playerMove === 'paper' && computerMove === 'rock')) {
 	    winner = 'player';
 	    } else {
 	    winner = 'computer';
 	    }
-	console.log("Round no. " + roundNum + ". Winner: " + winner);
+	console.log("Round no. " + roundNum + ". Computer played " + computerMove + ". Winner: " + winner);
     return winner;
 }
 
 function playToX() {
     console.log("Let's play Rock, Paper, Scissors.");
-    console.log("How many games are we playing to?");
-    var gamesToVictory = Number(prompt());
+    
+    console.log("How many wins does one of us need for victory?");
+    var gamesToVictory;
+    while (isNaN(gamesToVictory) || gamesToVictory < 1) {
+		gamesToVictory = Number(prompt());
+	}
+	
     var playerWins = 0;
     var computerWins = 0;
     
